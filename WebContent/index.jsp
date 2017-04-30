@@ -7,7 +7,7 @@
 <title>Index</title>
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 <script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
-<script type="text/javascript" src="script.js"></script>
+<script type="text/javascript" src="js/script.js"></script>
 </head>
 <body>
 <div class="viewport">

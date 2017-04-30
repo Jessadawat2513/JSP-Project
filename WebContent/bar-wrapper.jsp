@@ -6,17 +6,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Bar Wrapper</title>
 <link type="text/css" rel="stylesheet" href="css/main.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
 </head>
 <body>
 <div class="bar-wrapper">
 	<div class="row">
     	<div class="col-md-6"></div>
         <div class="col-md-6" align="right">
-            <form class="form-inline" action="loginController" method="post">
-                <input type="text" class="form-control" name="username" placeholder="Username"/>
-                <input type="text" class="form-control" name="password" placeholder="Password"/>
-                <input type="submit" class="btn btn-default" value="Login"/>
-            </form>
+        	<input type="button" class="btn btn-default" value="Log out">
         </div>
 	</div>
 </div>

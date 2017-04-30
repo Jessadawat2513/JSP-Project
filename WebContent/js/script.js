@@ -1,3 +1,3 @@
 function Login(){
-	alert("Login Success !!!");
+	alert("Login Success !!!" + $("#username").val() + " " + $("#password").val());
 }
