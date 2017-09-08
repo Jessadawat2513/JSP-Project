@@ -1,0 +1,81 @@
+@charset "utf-8";
+/* CSS Document */
+
+.viewport{
+	position:absolute;
+	top:0px;
+	width:100%;
+	min-height:100%;
+}
+
+.contrainermain{
+	position:absolute;
+	top:0%;
+	left:100px;
+	right:100px;
+	height:100%;
+}
+
+.header-wrapper{
+	top:0px;
+	width:100%;
+	height:200px;
+	background-color:rgba(0,102,255,1);
+}
+
+.bar-wrapper{
+	top:auto;
+	padding:7px;
+	width:100%;
+	height:auto;
+	background-color:rgba(224,224,224,1);
+}
+
+.menu-wrapper{
+	position:absolute;
+	top:auto;
+	width:23%;
+	height:auto;
+	padding: 10px;
+	background-color:rgba(211,211,211,1);
+}
+
+.menu-wrapper div{
+	padding-top: 2px;
+}
+
+.body-wrapper{
+	position:absolute;
+	left:23%;
+	right:0px;
+	height:auto;
+	padding: 10px;
+}
+
+.footer-wrapper{
+	position:fixed;
+	top:95%;
+	height:auto;
+	text-align:center;
+	left:0px;
+	right:0px;
+	background-color:rgba(0,0,0,1);
+}
+
+#option{
+	padding-left: 1.5em;
+}
+
+#tab1{
+	padding-left: 1.5em;
+}
+
+table thead{
+	background-color: rgba(131, 164, 224 ,1);
+}
+
+table th{
+	text-align: center;
+}
+
+
