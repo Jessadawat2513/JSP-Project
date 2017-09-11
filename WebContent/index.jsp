@@ -1,12 +1,29 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ include file="link.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Insert title here</title>
+<title>Index</title>
 </head>
 <body>
-<h3>Test</h3>
+<div class="viewport">
+	<div class="contrainermain">
+	<jsp:include page="header-wrapper.jsp"></jsp:include>
+	<div class="bar-wrapper">
+		<div class="row">
+	    	<div class="col-md-6"></div>
+	        <div class="col-md-6" align="right">
+	            <form class="form-inline" method="post">
+	                <input type="text" class="form-control" name="username" id="username" placeholder="Username"/>
+	                <input type="text" class="form-control" name="password" id="password" placeholder="Password"/>
+	                <input type="button" class="btn btn-default" value="Login" onclick="Login()"/>
+	            </form>
+	        </div>
+		</div>
+	</div>
+	</div>
+</div>
 </body>
 </html>
