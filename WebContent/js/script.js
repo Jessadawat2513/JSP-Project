@@ -1763,6 +1763,7 @@ function ActionClasstime(action,day_id,class_id){
 }
 
 function ActionCoursedetail(action){
+	var Select = [];
 	var $course = $("#course");
 	var $coursedetail = $("#coursedetail");
 	var course_value = $("#course option:selected").val();
@@ -1770,7 +1771,6 @@ function ActionCoursedetail(action){
 	var course_text = $("#course option:selected").text();
 	var coursedetail_text = $("#coursedetail option:selected").text();
 	var semester = $("#semester").val();
-	var year = $("#year").val();
 	if(action == "AddView"){
 		$.ajax({
 			method : "POST",
@@ -1780,14 +1780,78 @@ function ActionCoursedetail(action){
 		});
 	}
 	if(action == "Changet_semester"){
+		if(semester == "000"){
+				
+		}else{
+			$.ajax({
+				method : "POST",
+				url : "CoursedetailChange",
+				data : {semester:semester}
+			}).done(function(data){
+				
+			});
+		}
 	}
 	if(action == "Addtolist"){
+		if(course_value != null){
+			$course.find("option:selected").remove();
+			$("<option>").val(course_value).text(course_text).appendTo($coursedetail);
+		}
 	}
 	if(action == "Deletefromlist"){
+		if(coursedetail_value != null){
+			$coursedetail.find("option:selected").remove();
+			$("<option>").val(coursedetail_value).text(coursedetail_text).appendTo($course);
+		}
 	}
 	if(action == "Clearlist"){
+		$("#coursedetail option").each(function(){
+			$("<option>").val($(this).val()).text($(this).text()).appendTo($course);
+		});
+		$coursedetail.find("option").remove();
 	}
 	if(action == "Add"){
+		if(semester != "000"){
+			var i = 0;
+			$("#coursedetail option").each(function(){
+				Select[i] = $(this).val();
+				i++;
+			});
+			$.ajax({
+				method : "POST",
+				url : "CoursedetailAdd",
+				data : {semester:semester,Select:Select}
+			}).done(function(status){
+				if(status == "success"){
+					$("#myModalLg").modal();
+					$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
+					$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true">เพิ่มข้อมูลสำเร็จแล้ว</span></h4>');
+					var btnsave = '<button type="button" class="btn btn-default" id="OK" data-dismiss="modal">OK</button>';
+					var btnclose = '<button type="button" class="btn btn-default" data-dismiss="modal">NO</button>';
+					$("#lgfootermodel").html(btnsave+' '+btnclose);
+					$("#OK").click(function(){
+						$.ajax({
+							method : "POST",
+							url : "CoursedetailAddView"
+						}).done(function(){
+							window.location.href="coursedetailadd.jsp";
+						});
+					});
+				}else{
+					$("#myModalLg").modal();
+					$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
+					$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true">เพิ่มข้อมูลไม่สำเร็จ</span></h4>');
+					var btnclose = '<button type="button" class="btn btn-default" id="close" data-dismiss="modal">OK</button>';
+					$("#lgfootermodel").html(btnclose);
+				}
+			});
+		}else{
+			$("#myModalLg").modal();
+			$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
+			$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>ไม่ได้เลือกข้อมูลเทอม หรือ ปีการศึกษา</h4>');
+			var btnclose = '<button type="button" class="btn btn-default" id="close" data-dismiss="modal">OK</button>';
+			$("#lgfootermodel").html(btnclose);
+		}
 	}
 }
 

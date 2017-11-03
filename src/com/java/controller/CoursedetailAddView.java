@@ -47,10 +47,6 @@ public class CoursedetailAddView extends HttpServlet {
 		Course course;
 		ArrayList<Course> course_list = new ArrayList<>();
 		
-		Year year = new Year();
-		Year year1;
-		ArrayList<Year> year_list = new ArrayList<>();
-		
 		Connection conn;
 		Statement st;
 		ResultSet rs;
@@ -58,7 +54,7 @@ public class CoursedetailAddView extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "select sem_id,sem_name from d_semester order by sem_id asc";
+			String qr = "select s.sem_id,d.sem_name,s.year from semester s,d_semester d where s.sem_id = d.sem_id order by s.sem_id,s.year asc";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);
@@ -67,21 +63,8 @@ public class CoursedetailAddView extends HttpServlet {
 				semester = new Semester();
 				semester.setSemesterId(rs.getString("sem_id"));
 				semester.setSemesterName(rs.getString("sem_name"));
+				semester.setYear(rs.getString("year"));
 				sem_list.add(semester);
-			}
-			
-			String qr1 = "select to_char(sysdate,'YYYY') as year from dual";
-			
-			st = conn.createStatement();
-			rs = st.executeQuery(qr1);
-			
-			while(rs.next()){
-				year.setYear(rs.getString("year"));
-				for(int i = Integer.parseInt(year.getYear())-10;i<=Integer.parseInt(year.getYear())+20;i++){
-					year1 = new Year();
-					year1.setYear(Integer.toString(i));
-					year_list.add(year1);
-				}
 			}
 			
 			String qr2 = "select c_code,c_name from course";
@@ -98,7 +81,6 @@ public class CoursedetailAddView extends HttpServlet {
 			
 			HttpSession session = request.getSession();
 			session.setAttribute("sem_list",sem_list);
-			session.setAttribute("year_list", year_list);
 			session.setAttribute("course_list", course_list);
 			
 		}catch(SQLException ex){

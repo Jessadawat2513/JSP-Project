@@ -26,21 +26,15 @@
 			<div class="panel-body" align="center">
 				<form>
 					<div class="form-group row">
-						<label class="col-sm-2" style="text-align: right;"><h3>เทอม : </h3></label>
+						<label class="col-sm-5" style="text-align: right;"><h3>ภาคกาศึกษา : </h3></label>
 						<div class="col-sm-3"><h3>
 							<select class="form-control col-sm-2" id="semester" onchange="ActionCoursedetail('Changet_semester')">
 								<option value="000">-----------------------</option>
 								<c:forEach items="${sem_list}" var="sem_list">
-									<option value="${sem_list.getSemesterId()}"><c:out value="${sem_list.getSemesterName()}"></c:out></option>
-								</c:forEach>
-							</select></h3>
-						</div>
-						<label class="col-sm-2" style="text-align: right;"><h3>ปีการศึกษา : </h3></label>
-						<div class="col-sm-3"><h3>
-							<select class="form-control col-sm-2" id="year" onchange="ActionCoursedetail('Changet_semester')">
-								<option value="000">-----------------------</option>
-								<c:forEach items="${year_list}" var="year_list">
-									<option value="${year_list.getYear()}"><c:out value="${year_list.getYear()}"></c:out></option>
+									<option value="${sem_list.getSemesterId()}${sem_list.getYear()}">
+										<c:out value="${sem_list.getSemesterName()}"></c:out>/
+										<c:out value="${sem_list.getYear()}"></c:out>
+									</option>
 								</c:forEach>
 							</select></h3>
 						</div>
