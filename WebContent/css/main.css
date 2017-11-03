@@ -62,7 +62,7 @@
 	background-color:rgba(0,0,0,1);
 }
 
-#option{
+#event{
 	padding-left: 1.5em;
 }
 
@@ -74,8 +74,14 @@ table thead{
 	background-color: rgba(131, 164, 224 ,1);
 }
 
-table th{
+table th,table td{
 	text-align: center;
 }
 
+.bg-active{
+	background-color: rgba(3, 254, 0 ,0.6);
+}
 
+.bg-nonactive{
+	background-color: rgba(255, 0, 0 ,0.6);
+}

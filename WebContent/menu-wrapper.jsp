@@ -9,73 +9,65 @@
 </head>
 <body onload="menuEvent()">
 <div class="menu-wrapper">
-	<c:forEach items="${login}" var="login">
+	<c:forEach items="${privilege}" var="privilege">
 		<c:choose>
-			<c:when test="${login.getLicenseId() == 001}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="001"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 001}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('PrivilegeView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 002}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="002"><c:out value="${login.getLicenseName()}"></c:out></div>
-					<div id="option">
-						<div id="op01"> - ข้อมูลตำแหน่ง</div>
-						<div id="op02"> - ข้อมูลสถานะ</div>
-						<div id="op03"> - ข้อมูลคณะ</div>
-						<div id="op04"> - ข้อมูลสาขา</div>
-						<div id="op05"> - ข้อมูลหน่วยงาน</div>
-						<div id="op06"> - ข้อมูลประเภท</div>
-						<div id="op07"> - ข้อมูลอาคาร</div>
-						<div id="op08"> - ข้อมูลชั้น</div>
-						<div id="op09"> - ข้อมูลเทอม</div>
-						<div id="op10"> - ข้อมูลปีการศึกษา</div>
-						<div id="op11"> - ข้อมูลรายวิชา</div>
+			<c:when test="${privilege.getPrivilegeId() == 002}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div id="002"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+					<div id="event">
+						<!--<div onclick="ActionView('PrivilegeView')">ข้อมูลสิทธิ์การใช้งาน</div>-->
+						<div onclick="ActionView('PositionView')">ข้อมูลตำแหน่ง</div>
+						<div onclick="ActionView('FacultyView')">ข้อมูลคณะและสาขา</div>
+						<div onclick="ActionView('DepartmentView')">ข้อมูลหน่วยงาน</div>
+						<div onclick="ActionView('CategoryView')">ข้อมูลประเภทห้อง</div>
+						<div onclick="ActionView('SemesterView')">ข้อมูลเทอมการศึกษา</div>
+						<div onclick="ActionView('CourseView')">ข้อมูลรายวิชา</div>
+						<div onclick="ActionView('BuildingView')">ข้อมูลอาคาร</div>
+						<div onclick="ActionView('ClassesView')">ข้อมูลคาบ</div>
+						<div onclick="ActionView('ClasstimeView')">ข้อมูลคาบเรียน</div>
+						<div onclick="ActionView('CoursedetailView')">รายละเอียดวิชา</div>
 					</div>
-				</c:when>
-			</c:choose>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 003}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="003"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 003}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('UsersView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 004}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="004"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 004}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('RoomView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 005}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="005"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 005}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="testClick()"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 006}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="006"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 006}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('BookingView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
-			<c:when test="${login.getLicenseId() == 007}">
-			<c:choose>
-				<c:when test="${login.getStatusId() == 001}">
-					<div id="007"><c:out value="${login.getLicenseName()}"></c:out></div>
-				</c:when>
-			</c:choose>
+			<c:when test="${privilege.getPrivilegeId() == 007}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('ApproveView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
+			</c:when>
+			<c:when test="${privilege.getPrivilegeId() == 008}">
+				<c:if test="${privilege.getStatus() == 001}">
+					<div onclick="ActionView('ApprovelineView')"><c:out value="${privilege.getPrivilegeName()}"></c:out></div>
+				</c:if>
 			</c:when>
 		</c:choose>
 	</c:forEach>
-	<div id="008"><c:out value="การอนุมัติจองห้อง"></c:out></div>
+	<div onclick="ActionHistory('View','${login.getUserId()}')">ประวัติการจอง</div>
+	<div onclick="Test()">ทดสอบสิ่งที่ต้องการ</div>
 </div>
 </body>
 </html>

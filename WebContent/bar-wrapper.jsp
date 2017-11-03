@@ -12,12 +12,10 @@
 	<div class="row">
     	<div class="col-md-8"></div>
         <div class="col-md-4" align="right">
-        	<c:forEach items="${login}" var="login" begin="0" end="0">
-        		<c:out value="${login.getFirstname()}"></c:out>
-        		<c:out value="${login.getLastname()}"></c:out>
-        		<c:out value="${login.getPositionName()}"></c:out>
-        	</c:forEach>
-        	<input type="button" class="btn btn-default" value="Log out" onclick="Logout()">
+        	<c:out value="${login.getFirstname()}"></c:out>
+        	<c:out value="${login.getLastname()}"></c:out>
+        	<c:out value="${login.getPname()}"></c:out>
+        	<input type="button" class="btn btn-default" value="Log out" onclick="Logout('LogoutController')">
         </div>
 	</div>
 </div>

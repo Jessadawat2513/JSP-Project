@@ -5,7 +5,7 @@
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<title>Index</title>
+<title>Insert title here</title>
 </head>
 <body>
 <div class="viewport">
@@ -15,10 +15,10 @@
 		<div class="row">
 	    	<div class="col-md-6"></div>
 	        <div class="col-md-6" align="right">
-	            <form class="form-inline" method="post">
-	                <input type="text" class="form-control" name="username" id="username" placeholder="Username"/>
-	                <input type="text" class="form-control" name="password" id="password" placeholder="Password"/>
-	                <input type="button" class="btn btn-default" value="Login" onclick="Login()"/>
+	            <form class="form-inline" method="get">
+	                <input type="text" class="form-control" name="username" id="username" placeholder="Username" value="5711850028"/>
+	                <input type="password" class="form-control" name="password" id="password" placeholder="Password" value="Aa10000011"/>
+	                <input type="button" class="btn btn-default" value="Login" onclick="Login('home')"/>
 	            </form>
 	        </div>
 		</div>

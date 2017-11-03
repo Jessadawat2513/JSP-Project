@@ -1,15 +1,13 @@
 package com.java.model;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import java.sql.*;
 
 public class ConnectionManager {
 	static Connection conn;
 	static String Driver = "oracle.jdbc.driver.OracleDriver";
-	static String ConnectURL = "jdbc:oracle:thin:@localhost:1521:First";
+	static String ConnectURL = "jdbc:oracle:thin:@localhost:1521:FIRSTDB";
 	static String Username = "Project";
-	static String Password = "User1234";
+	static String Password = "project12345";
 	
 	public static Connection getConnection(){
 		try{

@@ -8,6 +8,13 @@
 <title>Home</title>
 </head>
 <body>
+<%
+    session=request.getSession(false);
+    if(session.getAttribute("login")==null)
+    {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <div class="viewport">
 	<div class="contrainermain">
 	<jsp:include page="header-wrapper.jsp"></jsp:include>
