@@ -2,19 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="link.jsp"%>
+<%@ include file="checksession.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<%
-    session=request.getSession(false);
-	if(session.getAttribute("login")==null)
-	{
-	    response.sendRedirect("index.jsp");
-	}
-%>
 <div class="viewport">
 	<div class="contrainermain">
 	<jsp:include page="header-wrapper.jsp"></jsp:include>
@@ -26,37 +20,65 @@
 			<div class="panel-body" align="center">
 				<form class="form-horizontal">
 					<div class="form-group">
-						<label class="control-label col-sm-4">Room</label>
-						<div class="col-sm-4">
-							<select class="form-control" id="room">
+						<label class="control-label col-sm-3">ภาคการศึกษา</label>
+						<div class="col-sm-3">
+							<select class="form-control" id="semester">
+								<option value="" selected="selected" hidden>เลือกภาคการศึกษา</option>
+						    	<c:forEach items="${sem_list}" var="sem_list">
+						    		<option value="${sem_list.getSemesterId()}${sem_list.getYear()}"><c:out value="${sem_list.getSemesterName()} / ${sem_list.getYear()}"></c:out></option>
+								</c:forEach>
+						    </select>
+						</div>
+						
+						<label class="control-label col-sm-1">ห้อง</label>
+						<div class="col-sm-3">
+							<select class="form-control" id="room" onchange="DetailRoomTime()">
+								<option value="" selected="selected" hidden>เลือกห้อง</option>
 						    	<c:forEach items="${room_list}" var="room_list">
-						    		<option value="${room_list.getRoomNum()}"><c:out value="${room_list.getRoomNum()}"></c:out></option>
+						    		<c:choose>
+						    			<c:when test="${room_list.getRoomNum() == room_select}">
+						    				<option value="${room_list.getRoomNum()}" selected="selected" hidden><c:out value="${room_list.getRoomNum()}"></c:out></option>
+						    			</c:when>
+						    			<c:otherwise>
+						    				<option value="${room_list.getRoomNum()}"><c:out value="${room_list.getRoomNum()}"></c:out></option>
+						    			</c:otherwise>
+						    		</c:choose>
 								</c:forEach>
 						    </select>
 						</div>
 					</div>
+
 					<div class="form-group">
-						<label class="control-label col-sm-4">Start Date : </label>
-						<div class="col-sm-4">
-							<input type="date" class="form-control" id="st_date">
+						<div class="row">
+							<div class="col-md-3"></div>
+							<div style="overflow:hidden;">
+								<div class="col-md-4">
+									<label class="control-label">Start Date : </label>
+									<div id="datetimepicker6"></div>
+								</div>
+							<div class="col-md-1"></div>
+								<div class="col-md-4">
+									<label class="control-label">End Date : </label>
+									<div id="datetimepicker7"></div>
+								</div>
+							</div>
 						</div>
 					</div>
+					
 					<div class="form-group">
-						<label class="control-label col-sm-4">Start Time : </label>
-						<div class="col-sm-4">
-							<input type="time" class="form-control" id="st_time">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4">End Date : </label>
-						<div class="col-sm-4">
-							<input type="date" class="form-control" id="ed_date">
-						</div>
-					</div>
-					<div class="form-group">
-						<label class="control-label col-sm-4">End Time : </label>
-						<div class="col-sm-4">
-							<input type="time" class="form-control" id="ed_time">
+						<div class="row">
+							<label class="control-label col-sm-4">Start Time : </label>
+							<div class="col-sm-2">
+								<select class="form-control" id="st_time" onchange="EventTime('H:M')">
+							    	<option value="" hidden>เวลาเริ่ม</option>
+							    </select>
+							</div>
+							<label class="control-label col-sm-2">End Time : </label>
+							<div class="col-sm-2">
+								<select class="form-control" id="ed_time">
+							    	<option value="" hidden>เวลาสิ้นสุด</option>
+							    </select>
+							</div>
 						</div>
 					</div>
 					<div class="form-group">

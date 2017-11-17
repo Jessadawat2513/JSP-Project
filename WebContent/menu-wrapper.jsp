@@ -7,7 +7,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Menu Wrapper</title>
 </head>
-<body onload="menuEvent()">
+<body onload="action_event()">
 <div class="menu-wrapper">
 	<c:forEach items="${privilege}" var="privilege">
 		<c:choose>
@@ -31,6 +31,7 @@
 						<div onclick="ActionView('ClassesView')">ข้อมูลคาบ</div>
 						<div onclick="ActionView('ClasstimeView')">ข้อมูลคาบเรียน</div>
 						<div onclick="ActionView('CoursedetailView')">รายละเอียดวิชา</div>
+						<div onclick="ActionView('ScheduleView')">ตารางเรียน</div>
 					</div>
 				</c:if>
 			</c:when>

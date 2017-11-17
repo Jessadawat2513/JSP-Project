@@ -2,19 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="link.jsp"%>
+<%@ include file="checksession.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Insert title here</title>
 </head>
 <body>
-<%
-    session=request.getSession(false);
-	if(session.getAttribute("login")==null)
-	{
-	    response.sendRedirect("index.jsp");
-	}
-%>
 <div class="viewport">
 	<div class="contrainermain">
 	<jsp:include page="header-wrapper.jsp"></jsp:include>
@@ -60,6 +54,28 @@
 						    	<c:forEach items="${category_list}" var="category_list">
 									<option value="${category_list.getCatId()}"><c:out value="${category_list.getCatName()}"></c:out></option>
 								</c:forEach>
+						    </select>
+						</div>
+					</div>
+					<div class="form-group">
+						<label class="control-label col-sm-4">เวลาที่อนุญาติ</label>
+						<div class="col-sm-4">
+							<select class="form-control" id="st_time" onchange="EventTime('Hours')">
+						    	<option value="" hidden>เวลาเริ่ม</option>
+						    	<%
+						    		int i = 0;
+						    		for(i=0;i<24;i++){
+						    			if(i<10){
+						    				%><option value="<%="0"+i+":00"%>"><%="0"+i+":00"%></option><%
+						    			}else{
+						    				%><option value="<%=i+":00"%>"><%=i+":00"%></option><%
+						    			}
+						    		}
+						    	%>
+						    </select>
+						    &nbsp;
+						    <select class="form-control" id="ed_time">
+						    	<option value="" hidden>เวลาสิ้นสุด</option>
 						    </select>
 						</div>
 					</div>

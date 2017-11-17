@@ -54,11 +54,7 @@
 						<div class="col-sm-4">
 							<select class="form-control" id="position">
 						    	<c:forEach items="${user_position}" var="user_position">
-									<c:choose>
-										<c:when test="${user_position.getStatusId() == 001}">
-											<option value="${user_position.getPid()}"><c:out value="${user_position.getPname()}"></c:out></option>
-										</c:when>
-									</c:choose>
+									<option value="${user_position.getPid()}"><c:out value="${user_position.getPname()}"></c:out></option>
 								</c:forEach>
 						    </select>
 						</div>
@@ -68,11 +64,7 @@
 						<div class="col-sm-4">
 							<select class="form-control" id="faculty" onchange="ActionUsers('UsersAddUpdate')">
 								<c:forEach items="${user_faculty}" var="user_faculty">
-									<c:choose>
-										<c:when test="${user_faculty.getStatusId() == 001}">
-											<option value="${user_faculty.getFacId()}"><c:out value="${user_faculty.getFacName()}"></c:out></option>
-										</c:when>
-									</c:choose>
+									<option value="${user_faculty.getFacId()}"><c:out value="${user_faculty.getFacName()}"></c:out></option>
 								</c:forEach>
 						    </select>
 						</div>
@@ -90,11 +82,7 @@
 						<div class="col-sm-4">
 							<select class="form-control" id="department">
 						    	<c:forEach items="${user_department}" var="user_department">
-									<c:choose>
-										<c:when test="${user_department.getStatusId() == 001}">
-											<option value="${user_department.getDepId()}"><c:out value="${user_department.getDepName()}"></c:out></option>
-										</c:when>
-									</c:choose>
+									<option value="${user_department.getDepId()}"><c:out value="${user_department.getDepName()}"></c:out></option>
 								</c:forEach>
 						    </select>
 						</div>

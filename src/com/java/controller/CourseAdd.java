@@ -48,7 +48,7 @@ public class CourseAdd extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "INSERT INTO "+"COURSE"+" (C_CODE,C_NAME,CREDIT,S_C_ID) VALUES ('"+code+"','"+cname+"','"+credit+"','001')";
+			String qr = "INSERT INTO "+"COURSE"+" (C_CODE,C_NAME,CREDIT,S_C_ID) VALUES ('"+code+"','"+cname+"','"+credit+"','002')";
 			
 			st = conn.createStatement();
 			st.executeQuery(qr);

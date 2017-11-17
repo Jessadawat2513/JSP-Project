@@ -22,12 +22,91 @@
 	<jsp:include page="menu-wrapper.jsp"></jsp:include>
 	<div class="body-wrapper">
 		<div class="panel panel-primary">
-			<div class="panel-heading"><h4>Home</h4></div>
+			<div class="panel-heading"><h4>Course Detail Edit</h4></div>
 			<div class="panel-body" align="center">
-				<div class="jumbotron">
-					<h1>Reservation</h1>      
-					<p><h3>ระบบการจองห้อง</h3></p>
-				</div>     
+				<form>
+					<div class="form-group row">
+						<label class="col-sm-5" style="text-align: right;"><h3>ภาคกาศึกษา : </h3></label>
+						<div class="col-sm-3"><h3>
+							<select class="form-control col-sm-2" id="semester" onchange="ActionCoursedetail('Change_semester_Edit')">
+								<option value="000">-----------------------</option>
+								<c:forEach items="${sem_list}" var="sem_list">
+									<c:choose>
+										<c:when test="${sem_list.getSemesterId() == coursedt.getSemId()}">
+											<c:choose>
+												<c:when test="${sem_list.getYear() == coursedt.getYear()}">
+													<option value="${sem_list.getSemesterId()}${sem_list.getYear()}" selected="selected">
+														<c:out value="${sem_list.getSemesterName()}"></c:out>/
+														<c:out value="${sem_list.getYear()}"></c:out>
+													</option>
+												</c:when>
+												<c:otherwise>
+													<option value="${sem_list.getSemesterId()}${sem_list.getYear()}">
+														<c:out value="${sem_list.getSemesterName()}"></c:out>/
+														<c:out value="${sem_list.getYear()}"></c:out>
+													</option>
+												</c:otherwise>
+											</c:choose>
+										</c:when>
+										<c:otherwise>
+											<option value="${sem_list.getSemesterId()}${sem_list.getYear()}">
+												<c:out value="${sem_list.getSemesterName()}"></c:out>/
+												<c:out value="${sem_list.getYear()}"></c:out>
+											</option>
+										</c:otherwise>
+									</c:choose>
+								</c:forEach>
+							</select></h3>
+						</div>
+					</div>
+					<div class="row">
+						<div class="form-group col-sm-5">
+							<label>รายวิชา</label>
+							<select multiple="multiple" class="form-control" id="course" style="height: 200px;">
+								<c:forEach items="${course_list}" var="course_list">
+									<option value="${course_list.getCourseCode()}">
+										<c:out value="${course_list.getCourseCode()}"></c:out> | 
+										<c:out value="${course_list.getCourseName()}"></c:out>
+									</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="form-group  col-sm-2">
+							<div class="btn-group-vertical" role="group">
+								<label>.</label>
+								 <button type="button" class="btn btn-default btn-lg" onclick="ActionCoursedetail('Addtolist')">
+								 	<span class="glyphicon glyphicon-plus-sign"></span>
+								 </button>
+								  <button type="button" class="btn btn-default btn-lg" onclick="ActionCoursedetail('Deletefromlist')">
+								 	<span class="glyphicon glyphicon-minus-sign"></span>
+								 </button>
+								  <button type="button" class="btn btn-default btn-lg" onclick="ActionCoursedetail('Clearlist')">
+								 	<span class="glyphicon glyphicon-remove-sign"></span>
+								 </button>
+							</div>
+						</div>
+						<div class="form-group  col-sm-5">	
+							<label>รายวิชาที่ต้องการ</label>
+							<select multiple="multiple" class="form-control" id="coursedetail" style="height: 200px;">
+								<c:forEach items="${cd_list}" var="cd_list">
+									<option value="${cd_list.getC_code()}">
+										<c:out value="${cd_list.getC_code()}"></c:out> | 
+										<c:out value="${cd_list.getC_name()}"></c:out>
+									</option>
+								</c:forEach>
+							</select>
+						</div>
+					</div>
+					&nbsp;
+					<div class="form-group">
+						<div class="col-sm-offset-3 col-sm-6">
+							<div class="btn-group">
+								<button type="button" class="btn btn-default" onclick="ActionCoursedetail('Update')">OK</button>
+								<button type="button" class="btn btn-default" onclick="ActionView('CoursedetailView')">Back</button>
+							</div>
+						</div>
+					</div>  
+				</form>
 			</div>
 		</div>
 	</div>

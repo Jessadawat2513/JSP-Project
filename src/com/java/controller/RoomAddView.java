@@ -44,7 +44,6 @@ public class RoomAddView extends HttpServlet {
 		Building building;
 		ArrayList<Building> b_list = new ArrayList<>();
 		
-		
 		Category category;
 		ArrayList<Category> c_list = new ArrayList<>();
 		
@@ -55,7 +54,7 @@ public class RoomAddView extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "select b_id,b_name from building where s_b_id = '001'";
+			String qr = "select b_id,b_name from building";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);
@@ -67,7 +66,7 @@ public class RoomAddView extends HttpServlet {
 				b_list.add(building);
 			}
 			
-			String qr1 = "select cat_id,cat_name from category where s_cat_id = '001'";
+			String qr1 = "select cat_id,cat_name from category";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr1);

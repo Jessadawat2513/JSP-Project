@@ -55,7 +55,7 @@ public class UsersAddUpdate extends HttpServlet {
 	    try{
 	    	conn = ConnectionManager.getConnection();
 	    	
-	    	String qr = "select b.bra_name,b.s_fbd_id from faculty f,branch b where b.fac_id = f.fac_id and b.fac_id = '"+id+"' and b.s_fbd_id = '001'";
+	    	String qr = "select b.bra_name,b.s_fbd_id from faculty f,branch b where b.fac_id = f.fac_id and b.fac_id = '"+id+"'";
 	    	
 	    	st = conn.createStatement();
 	    	rs = st.executeQuery(qr);

@@ -14,9 +14,15 @@
 <title>Insert title here</title>
 <link type="text/css" rel="stylesheet" href="css/main.css">
 <link type="text/css" rel="stylesheet" href="css/bootstrap.min.css">
-<script type="text/javascript" src="js/jquery-3.1.1.min.js"></script>
+<link type="text/css" rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+<link type="text/css" rel="stylesheet" href="css/bootstrap-datetimepicker-standalone.css">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
 <script type="text/javascript" src="js/bootstrap.min.js"></script>
+<script type="text/javascript" src="js/moment.min.js"></script>
+<script type="text/javascript" src="js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="js/action_script.js"></script>
 <script type="text/javascript" src="js/script.js"></script>
+<script type="text/javascript" src="js/schedule_ms.js"></script>
 </head>
 <body>
 <jsp:include page="Dialog.jsp"></jsp:include>

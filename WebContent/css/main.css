@@ -78,6 +78,11 @@ table th,table td{
 	text-align: center;
 }
 
+#schedule tr td{
+	background-color: rgba(192,192,192,0.2);
+	vertical-align: middle;
+}
+
 .bg-active{
 	background-color: rgba(3, 254, 0 ,0.6);
 }

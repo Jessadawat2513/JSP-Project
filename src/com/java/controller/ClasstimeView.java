@@ -51,7 +51,7 @@ public class ClasstimeView extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "select d.day_id,d.day_name,c.class_id,c.class_name , t.start_time , t.end_time from classtime t,day d,class c where t.class_id = c.class_id and t.day_id = d.day_id order by t.day_id asc";
+			String qr = "select d.day_id,d.day_name,c.class_id,c.class_name , t.start_time , t.end_time from classtime t,day d,class c where t.class_id = c.class_id and t.day_id = d.day_id order by t.day_id,t.class_id asc";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);

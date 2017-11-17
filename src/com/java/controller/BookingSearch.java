@@ -83,10 +83,6 @@ public class BookingSearch extends HttpServlet {
 				room_list.add(room);
 			}
 			
-			/*for(Room element : room_list){
-				System.out.println(element.getRoomNum());
-			}*/
-			
 			String json = new Gson().toJson(room_list);
 			
 			response.setContentType("application/json");

@@ -8,6 +8,13 @@
 <title>Bar Wrapper</title>
 </head>
 <body>
+<%
+    session=request.getSession(false);
+    if(session.getAttribute("login")==null)
+    {
+        response.sendRedirect("index.jsp");
+    }
+%>
 <div class="bar-wrapper">
 	<div class="row">
     	<div class="col-md-8"></div>

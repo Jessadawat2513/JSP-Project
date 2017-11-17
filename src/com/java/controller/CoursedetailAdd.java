@@ -60,8 +60,18 @@ public class CoursedetailAdd extends HttpServlet {
 					
 					st = conn.createStatement();
 					st.executeQuery(qr1);
+					
+					String qr2 = "UPDATE "+"COURSE"+" SET S_C_ID = '001' WHERE S_C_ID = '002' AND C_CODE = '"+data+"'";
+					st = conn.createStatement();
+					st.execute(qr2);
+					
+					String qr3 = "UPDATE "+"SEMESTER"+" SET S_SEM_ID = '001' WHERE S_SEM_ID = '002' AND SEM_ID = '"+rs.getString("semester")+"' AND YEAR = '"+rs.getString("year")+"'";
+					st = conn.createStatement();
+					st.execute(qr3);
 				}
 			}
+			
+			
 			
 			response.setContentType("text/plain");
 			response.getWriter().write("success");

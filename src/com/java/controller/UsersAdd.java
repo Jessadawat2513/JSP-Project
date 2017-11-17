@@ -54,7 +54,7 @@ public class UsersAdd extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "select to_char(sysdate,'DDMMYYYY') || lpad(nvl(substr(max(user_id),9,4),0)+1,4,'0') as nextid from users";
+			String qr = "select to_char(sysdate,'DDMMYYYY') || lpad(nvl(substr(max(user_id),9,4),0)+1,4,'0') as nextid from users where to_char(sysdate,'DDMMYYYY') = substr(user_id,1,8)";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);
@@ -68,6 +68,22 @@ public class UsersAdd extends HttpServlet {
 				
 				st.execute(qr1);
 			}
+			
+			String qr1 = "UPDATE "+"POSITION"+" SET S_P_ID = '001' WHERE P_ID = '"+pos_id+"' AND S_P_ID = '002'";
+			st = conn.createStatement();
+			st.execute(qr1);
+			
+			String qr2 = "UPDATE "+"FACULTY"+" SET S_FBD_ID = '001' WHERE FAC_ID = '"+fac_id+"' AND S_FBD_ID = '002'";
+			st = conn.createStatement();
+			st.execute(qr2);
+			
+			String qr3 = "UPDATE "+"BRANCH"+" SET S_FBD_ID = '001' WHERE BRA_NAME = '"+bra_name+"' AND S_FBD_ID = '002'";
+			st = conn.createStatement();
+			st.execute(qr3);
+			
+			String qr4 = "UPDATE "+"DEPARTMENT"+" SET S_FBD_ID = '001' WHERE DEP_ID = '"+dep_id+"' AND S_FBD_ID = '002'";
+			st = conn.createStatement();
+			st.execute(qr4);
 			
 			response.setContentType("text/plain");
 			response.setCharacterEncoding("UTF-8");

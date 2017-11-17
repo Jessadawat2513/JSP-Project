@@ -24,40 +24,35 @@
 		<div class="panel panel-primary">
 			<div class="panel-heading"><h4>Course Detail</h4></div>
 			<div class="panel-body" align="center">
-				<table class="table table-bordered">
-					<thead>
-						<th>รหัสวิชา</th>
-						<th>ชื่อวิชา</th>
-						<th>เทอม/ปีการศึกษา</th>
-						<th colspan="2"></th>
-					</thead>
-					<tbody>
-						<c:if test="${empty coursedetail_view}">
-							<tr>
-								<td colspan="5">ไม่มีข้อมูล</td>
-							</tr>
-						</c:if>
-						<c:if test="${not empty coursedetail_view}">
-							<c:forEach items="${coursedetail_view}" var="coursedetail_view">
-								<tr>
-									<td><c:out value="${coursedetail_view.getC_code()}"></c:out></td>
-									<td><c:out value="${coursedetail_view.getC_name()}"></c:out></td>
-									<td><c:out value="${coursedetail_view.getSemName()}"></c:out> / <c:out value="${coursedetail_view.getYear()}"></c:out></td>
-									<td width="60">
-										<button type="button" class="btn btn-default" onclick="testClick()">
-											<span class="glyphicon glyphicon-pencil"></span>
-										</button>
-									</td>
-									<td width="60">
-										<button type="button" class="btn btn-default" onclick="testClick()">
-											<span class="glyphicon glyphicon-trash"></span>
-										</button>
-									</td>
-								<tr>
-							</c:forEach>
-						</c:if>
-					</tbody>
-				</table>
+				<form class="form-horizontal">
+					<div class="form-group row">
+						<label class="col-sm-5" style="text-align: right;"><h4>ภาคกาศึกษา :</h4></label>
+						<div class="col-sm-3">
+							<select class="form-control col-sm-2" id="semester" onchange="ActionCoursedetail('Change_semester_view')">
+								<option value="000" selected="selected">-----------------------</option>
+								<c:forEach items="${sem_list}" var="sem_list">
+									<option value="${sem_list.getSemesterId()}${sem_list.getYear()}">
+										<c:out value="${sem_list.getSemesterName()}"></c:out>/
+										<c:out value="${sem_list.getYear()}"></c:out>
+									</option>
+								</c:forEach>
+							</select>
+						</div>
+						<div class="btn-group col-sm-2">
+							<button type="button" class="btn btn-default" onclick="ActionCoursedetail('Edit')">
+								<span class="glyphicon glyphicon-pencil"></span>
+							</button>
+							<button type="button" class="btn btn-default" onclick="ActionCoursedetail('Delete')">
+									<span class="glyphicon glyphicon-trash"></span>
+							</button>
+						</div>
+					</div>
+					<div class="form-group row">
+						<label class="col-sm-12">ข้อมูลรายวิชา</label>
+						<div class="col-sm-3"></div>
+						<textarea class="form-control col-sm-6" rows="10" cols="1" id="courseview" style="width: 50%;" disabled="disabled"></textarea>
+					</div>
+				</form>
 				<div class="btn-group">
 					<button type="button" class="btn btn-default" onclick="ActionCoursedetail('AddView')">Add</button>
 					<button type="button" class="btn btn-default" onclick="goto('home')">Back</button>

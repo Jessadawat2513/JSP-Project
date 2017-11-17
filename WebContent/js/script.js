@@ -33,13 +33,6 @@ function Logout(page){
 	});
 }
 
-function menuEvent(){
-	$("#event").hide();
-	$("#002").click(function() {
-		$("#event").toggle();
-	});
-}
-
 function goto(page){
 	window.location.href=page+".jsp";
 }
@@ -393,7 +386,6 @@ function ActionEdit(page,ids){
 }
 
 function ActionUpdate(page,ids){
-	var status = $("input:radio:checked").val();
 	if(page == "PositionUpdate"){
 		var posname = $("#pos_name").val();
 		$("#myModalLg").modal();
@@ -406,7 +398,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "PositionUpdate",
-				data : {ids:ids,posname:posname,status:status}
+				data : {ids:ids,posname:posname}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -453,7 +445,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "FacultyUpdate",
-				data : {ids:ids,facname:facname,status:status}
+				data : {ids:ids,facname:facname}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -500,7 +492,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "DepartmentUpdate",
-				data : {ids:ids,depname:depname,status:status}
+				data : {ids:ids,depname:depname}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -547,7 +539,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "CategoryUpdate",
-				data : {ids:ids,catname:catname,status:status}
+				data : {ids:ids,catname:catname}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -596,7 +588,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "BuildingUpdate",
-				data : {ids:ids,bname:bname,position:position,note:note,status:status}
+				data : {ids:ids,bname:bname,position:position,note:note}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -645,7 +637,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "CourseUpdate",
-				data : {ids:ids,code:code,cname:cname,credit:credit,status:status}
+				data : {ids:ids,code:code,cname:cname,credit:credit}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -692,7 +684,7 @@ function ActionUpdate(page,ids){
 			$.ajax({
 				method : "POST",
 				url : "ClassesUpdate",
-				data : {ids:ids,classname:classname,status:status}
+				data : {ids:ids,classname:classname}
 			}).done(function(status){
 				if(status == "success"){
 					$("#myModalLg").modal();
@@ -1060,7 +1052,7 @@ function ActionUsers(page,user_id,user_status){
 				if(status == "success"){
 					$("#myModalLg").modal();
 					$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
-					$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>เพิ่มข้อมูลสำเร็จ</h4>');
+					$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>ลบข้อมูลสำเร็จ</h4>');
 					var btnclose = '<button type="button" class="btn btn-default" id="OK">OK</button>';
 					$("#lgfootermodel").html(btnclose);
 					$("#OK").click(function(){
@@ -1169,6 +1161,8 @@ function ActionRoom(page,room_num,status){
 	var category = $("#category").val();
 	var seat = line*lps;
 	var room_st = $("input:radio:checked").val();
+	var st_time = $("#st_time option:selected").val();
+	var ed_time = $("#ed_time option:selected").val();
 	if(page == 'RoomAddView'){
 		$.post(page).done(function(page){
 			window.location.href=page;
@@ -1178,7 +1172,7 @@ function ActionRoom(page,room_num,status){
 		$.ajax({
 			method : "POST",
 			url : page,
-			data : {roomnum:roomnum,line:line,lps:lps,seat:seat,building:building,category:category}
+			data : {roomnum:roomnum,line:line,lps:lps,seat:seat,building:building,category:category,st_time:st_time,ed_time:ed_time}
 		}).done(function(status){
 			if(status == 'success'){
 				$("#myModalLg").modal();
@@ -1282,10 +1276,11 @@ function ActionBooking(action,user_id,room_id,booking_id,g_booking_no){
 	var category = $("#category").val();
 	var building = $("#building").val();
 	var roomid = $("#room").val();
-	var st_date = $("#st_date").val();
-	var ed_date = $("#ed_date").val();
-	var st_time = $("#st_time").val();
-	var ed_time = $("#ed_time").val();
+	var semester = $("#semester").val();
+	var st_date = $("#datetimepicker6").find(".active").data("day");
+	var ed_date = $("#datetimepicker7").find(".active").data("day");
+	var st_time = $("#st_time option:selected").val();
+	var ed_time = $("#ed_time option:selected").val();
 	if(action == "ShowDetail"){
 		$.ajax({
 			method : "POST",
@@ -1302,35 +1297,57 @@ function ActionBooking(action,user_id,room_id,booking_id,g_booking_no){
 			data : {category:category,building:building}
 		}).done(function(data){
 			var i = 1;
-			var $table = $('table tbody');
-			$('#category option[value="000"]').prop('selected','selected');
-			$('#building option[value="000"]').prop('selected','selected');
+			var $table = $('#table_room tbody');
 			$table.empty();
 			$.each(data,function(index,room){
 				$('<tr>').appendTo($table)
-				.append($("<th>").text(i))
-                .append($("<th>").text(room.rm_num))
-                .append($("<th>").text(room.seat))
-                .append($("<th>").text(room.cat_name))
-                .append($("<th>").text(room.s_rm_name));
+				.append($("<td>").text(i))
+                .append($("<td>").text(room.rm_num))
+                .append($("<td>").text(room.seat))
+                .append($("<td>").text(room.cat_name))
+                .append($("<td>").text(room.s_rm_name))
+				.append($("<td width='50'>").html('<button type="button" class="btn btn-default" onclick="ActionBooking('+"'ShowDetail'"+','+"'${login.getUserId()}'"+','+"'${room_list.getRoomNum()}'"+')">'+
+										'<span class="glyphicon glyphicon glyphicon-list-alt"></span>'+
+										'</button>'));
 				i++;
 			});
+			if(i<=1){
+				alert("empty");
+				$('<tr>').appendTo($table)
+				.append($("<td colspan='6'>").text('ไม่มีข้อมูลห้อง'));
+			}
 		});
 	}
 	if(action == "AddView"){
+		var room_td = $("#room_td option:selected").val();
+		var room_val;
+		if(room_id!=null){
+			alert(room_id);
+			room_val = room_id;
+		}else if(room_td!=''){
+			alert(room_td);
+			room_val = room_td;
+		}else{
+			room_val = "null";
+		}
+		
 		$.ajax({
 			method : "POST",
-			url : "BookingAddView"
+			url : "BookingAddView",
+			data : {room_val:room_val}
 		}).done(function(){
 			window.location.href="bookingadd.jsp";
 		});
 	}
 	if(action == "AddBooking"){
+		alert(semester);
+		alert(roomid);
 		$.ajax({
 			method : "POST",
 			url : "BookingAdd",
 			data : {
 				user_id:user_id,
+				semester:semester,
 				roomid:roomid,
 				st_date:st_date,
 				ed_date:ed_date,
@@ -1338,7 +1355,8 @@ function ActionBooking(action,user_id,room_id,booking_id,g_booking_no){
 				ed_time:ed_time
 				}
 		}).done(function(status){
-			if(status == "success"){
+			alert(status);
+			if(status=='true'){
 				$.ajax({
 					method : "POST",
 					url : "BookingView",
@@ -1346,6 +1364,12 @@ function ActionBooking(action,user_id,room_id,booking_id,g_booking_no){
 				}).done(function(){
 					window.location.href="bookingview.jsp";
 				});
+			}else if(status=="no_data"){
+				$("#myModalLg").modal();
+				$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
+				$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span> มีประวัติการจองอยู่แล้ว ในช่วงเวลานี้ !!! </h4>');
+				var btnclose = '<button type="button" class="btn btn-default" data-dismiss="modal">OK</button>';
+				$("#lgfootermodel").html(btnclose);
 			}else{
 				$("#myModalLg").modal();
 				$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
@@ -1771,6 +1795,7 @@ function ActionCoursedetail(action){
 	var course_text = $("#course option:selected").text();
 	var coursedetail_text = $("#coursedetail option:selected").text();
 	var semester = $("#semester").val();
+	var $courseview = $("#courseview");
 	if(action == "AddView"){
 		$.ajax({
 			method : "POST",
@@ -1779,16 +1804,74 @@ function ActionCoursedetail(action){
 			window.location.href="coursedetailadd.jsp";
 		});
 	}
-	if(action == "Changet_semester"){
+	if(action == "Change_semester_view"){
 		if(semester == "000"){
-				
+			$courseview.text('');
 		}else{
 			$.ajax({
 				method : "POST",
 				url : "CoursedetailChange",
 				data : {semester:semester}
 			}).done(function(data){
-				
+				$courseview.text('');
+				$.each(data,function(key,value){
+					$courseview.append(value+'\n');
+				})
+			});
+		}
+	}
+	if(action == "Change_semester_Add"){
+		if(semester == "000"){
+			$coursedetail.removeAttr('disabled');
+			$course.removeAttr('disabled');
+			$coursedetail.find("option").each(function(){
+				$("<option>").val($(this).val()).text($(this).text()).appendTo($course);
+				$coursedetail.find("option").remove();
+			});
+		}else{
+			$.ajax({
+				method : "POST",
+				url : "CoursedetailChange",
+				data : {semester:semester}
+			}).done(function(data){
+				if(data=="null"){
+					$coursedetail.removeAttr('disabled');
+					$course.removeAttr('disabled');
+				}else{
+					$coursedetail.prop('disabled','disabled');
+					$course.prop('disabled','disabled');
+				}
+				$coursedetail.find("option").each(function(){
+					$("<option>").val($(this).val()).text($(this).text()).appendTo($course);
+					$coursedetail.find("option").remove();
+				});
+				$.each(data,function(key,value){
+					$("<option>").val(key).text(value).appendTo($coursedetail);
+					$course.find("option[value='"+key+"']").remove();
+				});
+			});
+		}
+	}
+	if(action == "Change_semester_Edit"){
+		if(semester == "000"){
+			$coursedetail.find("option").each(function(){
+				$("<option>").val($(this).val()).text($(this).text()).appendTo($course);
+				$coursedetail.find("option").remove();
+			});
+		}else{
+			$.ajax({
+				method : "POST",
+				url : "CoursedetailChange",
+				data : {semester:semester}
+			}).done(function(data){
+				$coursedetail.find("option").each(function(){
+					$("<option>").val($(this).val()).text($(this).text()).appendTo($course);
+					$coursedetail.find("option").remove();
+				});
+				$.each(data,function(key,value){
+					$("<option>").val(key).text(value).appendTo($coursedetail);
+					$course.find("option[value='"+key+"']").remove();
+				});
 			});
 		}
 	}
@@ -1853,6 +1936,97 @@ function ActionCoursedetail(action){
 			$("#lgfootermodel").html(btnclose);
 		}
 	}
+	if(action == "Edit"){
+		$.ajax({
+			method : "POST",
+			url : "CoursedetailEdit",
+			data : {semester:semester}
+		}).done(function(){
+			window.location.href="coursedetailedit.jsp";
+		});
+	}
+	if(action == "Update"){
+		var st = null;
+		if(semester != "000"){
+			$("#myModalLg").modal();
+			$("#lgheadermodel").html('<h3>Confirm Message !!!</h3>')
+			$("#lgbodymodel").html('<h4><span class="glyphicon glyphicon-info-sign" aria-hidden="true"></span>Do you want to save ?</h4>');
+			var btnsave = '<button type="button" class="btn btn-default" id="OK" data-dismiss="modal">Yes</button>';
+			var btnclose = '<button type="button" class="btn btn-default" data-dismiss="modal">No</button>';
+			$("#lgfootermodel").html(btnsave+' '+btnclose);
+			$("#OK").click(function(){
+				var i = 0;
+				$("#coursedetail option").each(function(){
+					Select[i] = $(this).val();
+					i++;
+				});
+				$.ajax({
+					method : "POST",
+					url : "CoursedetailUpdate",
+					data : {semester:semester,Select:Select}
+				}).done(function(status){
+					alert(status);
+				});
+			});
+		}
+	}
+	if(action == "Delete"){
+		
+	}
+}
+
+function EventTime(action){
+	var $ed_time = $("#ed_time");
+	var st_time = $("#st_time option:selected").val();
+	var i = st_time.substring(0,2);
+	i++;
+	$ed_time.find("option").remove();
+	if(action=="Hours"){
+		for(var j=i;j<24;j++){
+			if(j<10){
+				$("<option>").val("0"+j+":00").text("0"+j+":00").appendTo($ed_time);
+			}else{
+				$("<option>").val(j+":00").text(j+":00").appendTo($ed_time);
+			}
+		}
+	}
+	if(action=="H:M"){
+		for(var j=i;j<24;j++){
+			for(var k=0;k<60;k+=10){
+				if(j<10&&k==0){
+					$("<option>").val("0"+j+":00").text("0"+j+":00").appendTo($ed_time);
+				}else if(j<10&&k>0){
+					$("<option>").val("0"+j+":"+k).text("0"+j+":"+k).appendTo($ed_time);
+				}else if(j>=10&&k==0){
+					$("<option>").val(j+":00").text(j+":00").appendTo($ed_time);
+				}else{
+					$("<option>").val(j+":"+k).text(j+":"+k).appendTo($ed_time);
+				}
+			}
+		}
+	}
+}
+
+function DetailRoomTime(){
+	var $st_time = $("#st_time");
+	var $ed_time = $("#ed_time");
+	var rm_num = $("#room option:selected").val();
+	$.ajax({
+		method : "POST",
+		url : "BookingChange",
+		data : {rm_num:rm_num}
+	}).done(function(data){
+		$st_time.find("option").remove();
+		$ed_time.find("option").remove();
+		var i = 0;
+		$.each(data,function(index,value){
+			$("<option>").val(value).text(value).appendTo($st_time);
+			if(i>0){
+				$("<option>").val(value).text(value).appendTo($ed_time);
+			}
+			i++;
+		});
+	});
 }
 
 function testClick(){

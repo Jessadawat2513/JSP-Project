@@ -68,16 +68,16 @@
 						<label><h4><c:out value="${room_view.getBuildName()}"></c:out></h4></label>
 					</div>
 				</div>
-				&nbsp;&nbsp;
-				<div class="form-group">
+				&nbsp;
+				<div class="form-group row">
 					<div class="col-sm-offset-3 col-sm-6">
 						<div class="btn-group">
-							<button type="button" class="btn btn-default" onclick="ActionBooking('AddView')">จอง</button>
+							<button type="button" class="btn btn-default" onclick="ActionBooking('AddView','','${room_view.getRoomNum()}')">จอง</button>
 							<button type="button" class="btn btn-default" onclick="ActionView('BookingView')">กลับ</button>
 						</div>
 					</div>
 				</div>
-				&nbsp;&nbsp;
+				&nbsp;
 				<table class="table table-bordered">
 					<thead>
 						<tr>

@@ -55,11 +55,11 @@ public class FacultyAdd extends HttpServlet {
 			while(rs.next()){
 				st = conn.createStatement();
 				
-				String qr1 = "INSERT INTO "+"FACULTY"+" (FAC_ID,FAC_NAME,S_FBD_ID) VALUES ('"+rs.getString("nextid")+"','"+facname+"','001')";
+				String qr1 = "INSERT INTO "+"FACULTY"+" (FAC_ID,FAC_NAME,S_FBD_ID) VALUES ('"+rs.getString("nextid")+"','"+facname+"','002')";
 				
 				st.execute(qr1);
 			}
-			
+
 			response.setContentType("text/plain");
 			response.getWriter().print("success");
 			response.getWriter().close();

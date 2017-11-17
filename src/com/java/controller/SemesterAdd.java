@@ -50,7 +50,7 @@ public class SemesterAdd extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "INSERT INTO "+"SEMESTER"+" (SEM_ID,YEAR,START_DATE,END_DATE,S_SEM_ID) VALUES ('"+semester+"','"+year+"','"+stdate+"','"+eddate+"','001')";
+			String qr = "INSERT INTO "+"SEMESTER"+" (SEM_ID,YEAR,START_DATE,END_DATE,S_SEM_ID) VALUES ('"+semester+"','"+year+"','"+stdate+"','"+eddate+"','002')";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);

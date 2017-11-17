@@ -50,6 +50,9 @@ public class BookingView extends HttpServlet {
 		Room room;
 		ArrayList<Room> rm_list = new ArrayList<>();
 		
+		Semester semester;
+		ArrayList<Semester> sem_list = new ArrayList<>();
+		
 		Connection conn;
 		Statement st;
 		ResultSet rs;
@@ -96,10 +99,24 @@ public class BookingView extends HttpServlet {
 				rm_list.add(room);
 			}
 			
+			String qr3 = "select s.sem_id,d.sem_name,s.year from semester s,d_semester d where s.sem_id = d.sem_id order by s.sem_id,s.year asc";
+			
+			st = conn.createStatement();
+			rs = st.executeQuery(qr3);
+			
+			while(rs.next()){
+				semester = new Semester();
+				semester.setSemesterId(rs.getString("sem_id"));
+				semester.setSemesterName(rs.getString("sem_name"));
+				semester.setYear(rs.getString("year"));
+				sem_list.add(semester);
+			}
+			
 			HttpSession session = request.getSession();
 			session.setAttribute("category_list", cat_list);
 			session.setAttribute("building_list", b_list);
 			session.setAttribute("room_list", rm_list);
+			session.setAttribute("sem_list", sem_list);
 			
 			response.setContentType("text/html");
 			response.getWriter().print("bookingview.jsp");

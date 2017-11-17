@@ -2,19 +2,13 @@
     pageEncoding="UTF-8"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <%@ include file="link.jsp"%>
+<%@ include file="checksession.jsp"%>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <title>Home</title>
 </head>
 <body>
-<%
-    session=request.getSession(false);
-    if(session.getAttribute("login")==null)
-    {
-        response.sendRedirect("index.jsp");
-    }
-%>
 <div class="viewport">
 	<div class="contrainermain">
 	<jsp:include page="header-wrapper.jsp"></jsp:include>
@@ -27,11 +21,18 @@
 				<div class="jumbotron">
 					<h1>Reservation</h1>      
 					<p><h3>ระบบการจองห้อง</h3></p>
-				</div>     
-			</div>
+				</div>
 		</div>
 	</div>
+	
+	 <form method="POST" action="UploadFile" enctype="multipart/form-data" >
+        File:
+        <input type="file" name="file"  id="file"> <br/>
+        <input type="submit" value="Upload" name="upload" >
+    </form>
+    
 	</div>
 </div>
+
 </body>
 </html>

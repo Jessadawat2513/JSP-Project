@@ -60,7 +60,7 @@ public class PositionAdd extends HttpServlet {
 				position.setPid(rs.getString("nextid"));
 				st = conn.createStatement();
 				
-				String qr1 = "INSERT INTO "+"POSITION"+" (P_ID ,P_NAME,S_P_ID) VALUES ('"+rs.getString("nextid")+"','"+positionname+"','001')";
+				String qr1 = "INSERT INTO "+"POSITION"+" (P_ID ,P_NAME,S_P_ID) VALUES ('"+rs.getString("nextid")+"','"+positionname+"','002')";
 				
 				st.execute(qr1);
 			}

@@ -2,6 +2,7 @@ package com.java.model;
 
 public class Room {
 	String rm_num ,line ,lps , seat, cat_id, cat_name, b_id, b_name, s_rm_id, s_rm_name;
+	String start_time , end_time;
 	
 	public void setRoomNum(String rm_num){
 		this.rm_num = rm_num;
@@ -65,6 +66,22 @@ public class Room {
 	
 	public String getBuildName(){
 		return this.b_name;
+	}
+	
+	public void setStartTime(String start_time){
+		this.start_time = start_time;
+	}
+	
+	public String getStartTime(){
+		return this.start_time;
+	}
+	
+	public void setEndTime(String end_time){
+		this.end_time = end_time;
+	}
+	
+	public String getEndTime(){
+		return this.end_time;
 	}
 	
 	public void setStatusRoomId(String s_rm_id){

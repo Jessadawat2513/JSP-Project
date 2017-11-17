@@ -51,7 +51,7 @@ public class RoomView extends HttpServlet {
 		try{
 			conn = ConnectionManager.getConnection();
 			
-			String qr = "select r.rm_num,r.line,r.lps,r.seat,r.cat_id,c.cat_name,r.b_id,b.b_name,r.s_rm_id,s.s_rm_name from room r,category c,building b,s_room s where r.cat_id = c.cat_id and r.b_id = b.b_id and r.s_rm_id = s.s_rm_id order by r.rm_num asc";
+			String qr = "select r.rm_num,r.line,r.lps,r.seat,r.cat_id,c.cat_name,r.b_id,b.b_name,r.s_rm_id,s.s_rm_name,r.starttime,r.endtime from room r,category c,building b,s_room s where r.cat_id = c.cat_id and r.b_id = b.b_id and r.s_rm_id = s.s_rm_id order by r.rm_num asc";
 			
 			st = conn.createStatement();
 			rs = st.executeQuery(qr);
@@ -68,9 +68,11 @@ public class RoomView extends HttpServlet {
 				room.setBuildName(rs.getString("b_name"));
 				room.setStatusRoomId(rs.getString("s_rm_id"));
 				room.setStatusRoomName(rs.getString("s_rm_name"));
+				room.setStartTime(rs.getString("starttime"));
+				room.setEndTime(rs.getString("endtime"));
 				list.add(room);
 			}
-			
+
 			HttpSession session = request.getSession();
 			session.setAttribute("roomview", list);
 			

@@ -28,7 +28,7 @@
 					<div class="form-group row">
 						<label class="col-sm-5" style="text-align: right;"><h3>ภาคกาศึกษา : </h3></label>
 						<div class="col-sm-3"><h3>
-							<select class="form-control col-sm-2" id="semester" onchange="ActionCoursedetail('Changet_semester')">
+							<select class="form-control col-sm-2" id="semester" onchange="ActionCoursedetail('Change_semester_Add')">
 								<option value="000">-----------------------</option>
 								<c:forEach items="${sem_list}" var="sem_list">
 									<option value="${sem_list.getSemesterId()}${sem_list.getYear()}">
@@ -39,13 +39,13 @@
 							</select></h3>
 						</div>
 					</div>
-					&nbsp;
 					<div class="row">
 						<div class="form-group col-sm-5">
+							<label>รายวิชา</label>
 							<select multiple="multiple" class="form-control" id="course" style="height: 200px;">
 								<c:forEach items="${course_list}" var="course_list">
 									<option value="${course_list.getCourseCode()}">
-										<c:out value="${course_list.getCourseCode()}"></c:out>  
+										<c:out value="${course_list.getCourseCode()}"></c:out> | 
 										<c:out value="${course_list.getCourseName()}"></c:out>
 									</option>
 								</c:forEach>
@@ -53,6 +53,7 @@
 						</div>
 						<div class="form-group  col-sm-2">
 							<div class="btn-group-vertical" role="group">
+								<label>.</label>
 								 <button type="button" class="btn btn-default btn-lg" onclick="ActionCoursedetail('Addtolist')">
 								 	<span class="glyphicon glyphicon-plus-sign"></span>
 								 </button>
@@ -65,6 +66,7 @@
 							</div>
 						</div>
 						<div class="form-group  col-sm-5">	
+							<label>รายวิชาที่ต้องการ</label>
 							<select multiple="multiple" class="form-control" id="coursedetail" style="height: 200px;">
 							</select>
 						</div>
@@ -74,7 +76,7 @@
 						<div class="col-sm-offset-3 col-sm-6">
 							<div class="btn-group">
 								<button type="button" class="btn btn-default" onclick="ActionCoursedetail('Add')">OK</button>
-								<button type="button" class="btn btn-default" onclick="">Back</button>
+								<button type="button" class="btn btn-default" onclick="ActionView('CoursedetailView')">Back</button>
 							</div>
 						</div>
 					</div>  
